@@ -9,7 +9,7 @@ export default function NewPost() {
 
   return (
     <div className="container flex flex-col flex-1 items-center">
-      <button className="btn mt-10" onClick={openModal}>
+      <button id="modal-button" className="btn mt-10" onClick={openModal}>
         New Post
       </button>
       <dialog

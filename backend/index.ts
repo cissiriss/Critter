@@ -21,7 +21,7 @@ interface Data {
   id: number;
   display_name: string;
   title: string;
-  content: string;
+  description: string;
 }
 
 app.get("/", async (_request, response) => {
@@ -36,7 +36,7 @@ app.get("/", async (_request, response) => {
       id: row.id,
       display_name: row.display_name,
       title: row.title,
-      content: row.content,
+      description: row.description,
     }));
 
     response.status(200);
@@ -49,7 +49,7 @@ app.get("/", async (_request, response) => {
 
 app.post("/post", async (request, response) => {
   console.log(request.body);
-  const { display_name, title, content } = request.body;
+  const { display_name, title, description } = request.body;
 
   try {
     const query = `
@@ -66,8 +66,13 @@ app.post("/post", async (request, response) => {
         )
         RETURNING *;
       `;
-    const { rows } = await client.query(query, [display_name, title, content]);
-    response.status(201).json(rows);
+    const { rows } = await client.query(query, [
+      display_name,
+      title,
+      description,
+    ]);
+    response.status(201);
+    response.send(rows);
   } catch (error) {
     console.error("Error inserting post:", error);
     response.status(500).json({ error: "Failed to create post." });

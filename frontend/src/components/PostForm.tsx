@@ -10,7 +10,7 @@ export function PostForm({ setModalOpen }: ModalProps) {
     id: 0,
     display_name: "",
     title: "",
-    content: "",
+    description: "",
     created_at: "",
   });
 
@@ -36,7 +36,7 @@ export function PostForm({ setModalOpen }: ModalProps) {
     const formDataObject = {
       display_name: formData.display_name,
       title: formData.title,
-      content: formData.content,
+      description: formData.description,
     };
 
     console.log("Form data object:", JSON.stringify(formDataObject));
@@ -62,7 +62,7 @@ export function PostForm({ setModalOpen }: ModalProps) {
         id: 0,
         display_name: "",
         title: "",
-        content: "",
+        description: "",
         created_at: "",
       });
 
@@ -86,6 +86,7 @@ export function PostForm({ setModalOpen }: ModalProps) {
             <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM12.735 14c.618 0 1.093-.561.872-1.139a6.002 6.002 0 0 0-11.215 0c-.22.578.254 1.139.872 1.139h9.47Z" />
           </svg>
           <input
+            id="name-input"
             onChange={handleChange}
             name="display_name"
             type="text"
@@ -94,6 +95,7 @@ export function PostForm({ setModalOpen }: ModalProps) {
           />
         </label>
         <input
+          id="title-input"
           onChange={handleChange}
           name="title"
           type="text"
@@ -101,12 +103,13 @@ export function PostForm({ setModalOpen }: ModalProps) {
           className="input input-bordered w-full mb-4"
         />
         <textarea
+          id="description-input"
           onChange={handleChange}
-          name="content"
+          name="description"
           className="textarea textarea-bordered w-full mb-4"
           placeholder="Write your post here"
         ></textarea>
-        <button type="submit" className="btn">
+        <button id="submit-post" type="submit" className="btn">
           Post
         </button>
       </form>
