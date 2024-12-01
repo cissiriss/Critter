@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import DeletePost from "./DeletePost";
 
 export interface Posts {
   id: number;
@@ -37,6 +38,7 @@ export default function GetPosts() {
           <p id="post-description" className="mt-4 mb-4">
             {post.description}
           </p>
+          <DeletePost id={post.id} />
         </div>
       ))}
     </div>

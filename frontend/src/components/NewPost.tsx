@@ -22,7 +22,11 @@ export default function NewPost() {
           <PostForm setModalOpen={setModalOpen} />
           <div className="modal-action">
             <form method="dialog">
-              <button onClick={closeModal} className="btn">
+              <button
+                id="close-modal-button"
+                onClick={closeModal}
+                className="btn"
+              >
                 Close
               </button>
             </form>

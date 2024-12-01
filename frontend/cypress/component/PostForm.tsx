@@ -1,12 +1,4 @@
-import NewPost from "../../src/components/NewPost";
 import { PostForm } from "../../src/components/PostForm";
-
-describe("<GetPosts />", () => {
-  it("mounts", () => {
-    cy.mount(<NewPost />);
-    cy.get("#modal-button").click();
-  });
-});
 
 describe("<PostForm />", () => {
   it("mounts", () => {

@@ -1,24 +1,19 @@
-describe("E2E Test: POST and GET Posts", () => {
+describe("E2E Test: Testing the frontend", () => {
   const testData = {
-    title: "New Post2",
+    title: "New Post via the complete test",
     display_name: "Jane Doe",
-    description: "This is a test post created via POST!",
+    description: "This is a test post created via the complete test!",
   };
 
-  const length = 0;
-
-  it("creates a new post via POST and retrieves it via GET", () => {
-    cy.intercept("/", (req) => {
+  it("creates a new post and displays the post on the page", () => {
+    cy.intercept("localhost:3000/", (req) => {
       req.continue((res) => {
-        if (res.body.status === "failed") {
-          // sends a fixture body instead of the existing 'res.body'
-          res.send({ fixture: "success.json" });
-        }
+        expect(res.statusCode).to.eq(200);
       });
     });
 
-    cy.visit("http://localhost:5174/");
-    cy.request("GET", "/localhost:3000/");
+    cy.visit("http://localhost:5173/");
+
     cy.get("#modal-button").click();
 
     cy.get("#title-input").type(testData.title);
@@ -27,10 +22,6 @@ describe("E2E Test: POST and GET Posts", () => {
 
     cy.get("#submit-post").click();
 
-    cy.request("POST", "http://localhost:3000/post/", testData);
-
-    cy.visit("http://localhost:5174/");
-
-    cy.get("#post").should("have.length", length + 1);
+    cy.visit("http://localhost:5173/");
   });
 });

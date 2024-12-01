@@ -79,6 +79,32 @@ app.post("/post", async (request, response) => {
   }
 });
 
+app.delete("/post/:id", async (request, response) => {
+  const { id } = request.params;
+  try {
+    await client.query("DELETE FROM projects WHERE id = $1", [id]);
+    response.status(200);
+    response.send({ message: "Post deleted successfully." });
+  } catch (error) {
+    response.status(500).json({ error: "Failed to delete post." });
+  }
+});
+
+app.put("/post/update/:id", async (request, response) => {
+  const { id } = request.params;
+  const { display_name, title, description } = request.body;
+  try {
+    await client.query(
+      "UPDATE projects SET title = $1, description = $2 WHERE id = $3 AND user_id = $4 RETURNING *",
+      [display_name, title, description, id]
+    );
+    response.status(200);
+    response.send({ message: "Post updated successfully." });
+  } catch (error) {
+    response.status(500).json({ error: "Failed to update post." });
+  }
+});
+
 const portLocal = process.env.PORT_LOCAL;
 const portDocker = process.env.PORT_DOCKER;
 
